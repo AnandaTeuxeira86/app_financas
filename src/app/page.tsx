@@ -1,69 +1,156 @@
-import Image from "next/image";
+import Link from "next/link"
+import {
+  ArrowRightIcon,
+  DownloadIcon,
+  FilterIcon,
+  PieChartIcon,
+  ShieldCheckIcon,
+  SmartphoneIcon,
+  TagsIcon,
+} from "lucide-react"
+import { Logo } from "@/components/app/logo"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
-export default function Home() {
+const features = [
+  {
+    icon: PieChartIcon,
+    title: "Dashboard visual",
+    text: "Receitas, despesas e saldo do mês num relance, com gráfico de gastos por categoria.",
+  },
+  {
+    icon: TagsIcon,
+    title: "Categorias prontas",
+    text: "Alimentação, Moradia, Transporte, Salário e mais — sem configurar nada.",
+  },
+  {
+    icon: FilterIcon,
+    title: "Filtros e busca",
+    text: "Encontre qualquer lançamento por mês, ano, categoria ou descrição.",
+  },
+  {
+    icon: DownloadIcon,
+    title: "Exportar CSV",
+    text: "Leve suas transações filtradas para o Excel ou Google Planilhas em um clique.",
+  },
+  {
+    icon: SmartphoneIcon,
+    title: "Funciona no celular",
+    text: "Layout responsivo para registrar um gasto na hora, onde você estiver.",
+  },
+  {
+    icon: ShieldCheckIcon,
+    title: "Seus dados, só seus",
+    text: "Login seguro e isolamento por usuário direto no banco de dados.",
+  },
+]
+
+export default function LandingPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="flex min-h-full flex-col">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+        <Logo />
+        <nav className="flex items-center gap-2">
+          <Link href="/login" className={buttonVariants({ variant: "ghost" })}>
+            Entrar
+          </Link>
+          <Link href="/cadastro" className={buttonVariants()}>
+            Criar conta
+          </Link>
+        </nav>
+      </header>
+
+      <main className="flex-1">
+        <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
+          <div className="space-y-6">
+            <span className="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+              Gratuito e sem planilhas
+            </span>
+            <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+              Saiba para onde vai cada real do seu mês.
+            </h1>
+            <p className="max-w-md text-lg text-muted-foreground text-pretty">
+              Registre receitas e despesas em segundos e acompanhe seu saldo num dashboard limpo e
+              direto ao ponto.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/cadastro" className={cn(buttonVariants({ size: "lg" }), "h-11 px-5")}>
+                Começar agora <ArrowRightIcon />
+              </Link>
+              <Link
+                href="/login"
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-11 px-5")}
+              >
+                Já tenho conta
+              </Link>
+            </div>
+          </div>
+
+          <HeroPreview />
+        </section>
+
+        <section className="border-t bg-muted/40">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+            <h2 className="text-2xl font-semibold tracking-tight">Tudo o que você precisa</h2>
+            <p className="mt-2 text-muted-foreground">E nada que atrapalhe.</p>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map(({ icon: Icon, title, text }) => (
+                <div key={title} className="rounded-xl border bg-background p-5">
+                  <Icon className="size-5 text-primary" />
+                  <h3 className="mt-3 font-medium">{title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="border-t">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-muted-foreground sm:px-6">
+          Finanças — controle financeiro pessoal.
+        </div>
+      </footer>
     </div>
-  );
+  )
+}
+
+/** Prévia estática do dashboard, ilustrativa. */
+function HeroPreview() {
+  const rows = [
+    { label: "Moradia", value: 62, color: "#00b894" },
+    { label: "Alimentação", value: 41, color: "#257de0" },
+    { label: "Transporte", value: 23, color: "#f47230" },
+    { label: "Lazer", value: 14, color: "#f2a600" },
+  ]
+  return (
+    <div className="rounded-2xl border bg-background p-5 shadow-sm" aria-hidden>
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          ["Receitas", "R$ 6.200", "text-emerald-600"],
+          ["Despesas", "R$ 4.150", "text-rose-600"],
+          ["Saldo", "R$ 2.050", "text-foreground"],
+        ].map(([label, value, color]) => (
+          <div key={label} className="rounded-lg border p-3">
+            <p className="text-xs text-muted-foreground">{label}</p>
+            <p className={cn("mt-1 font-semibold tabular-nums", color)}>{value}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 text-sm font-medium">Despesas por categoria</p>
+      <div className="mt-3 space-y-3">
+        {rows.map((r) => (
+          <div key={r.label} className="flex items-center gap-3 text-sm">
+            <span className="w-24 text-muted-foreground">{r.label}</span>
+            <div className="h-2 flex-1 rounded-full bg-muted">
+              <div
+                className="h-2 rounded-full"
+                style={{ width: `${r.value}%`, backgroundColor: r.color }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
