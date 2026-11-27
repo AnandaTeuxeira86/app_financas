@@ -24,6 +24,7 @@ import {
   type TransactionType,
 } from "@/lib/finance"
 import { cn } from "@/lib/utils"
+import { errorMessage } from "@/lib/errors"
 
 export function TransactionDialog({
   open,
@@ -96,7 +97,7 @@ function TransactionForm({
       toast.success(transaction ? "Transação atualizada." : "Transação adicionada.")
       onDone()
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Não foi possível salvar.")
+      toast.error(errorMessage(err, "Não foi possível salvar."))
     } finally {
       setSaving(false)
     }

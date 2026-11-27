@@ -46,7 +46,11 @@ function Dashboard({ initial }: { initial: Period }) {
         </div>
       </div>
 
-      {error && <p className="text-sm text-destructive">Erro ao carregar dados: {error}</p>}
+      {error && (
+        <p role="alert" className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          Não foi possível carregar as transações. {error}
+        </p>
+      )}
 
       <SummaryCards {...totals} loading={loading} />
 

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { errorMessage } from "@/lib/errors"
 import { periodRange, type Transaction, type TransactionInput } from "@/lib/finance"
 
 export function useTransactions(year: number, month: number) {
@@ -20,7 +21,7 @@ export function useTransactions(year: number, month: number) {
       .order("created_at", { ascending: false })
 
     if (error) {
-      setError(error.message)
+      setError(errorMessage(error))
     } else {
       setError(null)
       setTransactions(

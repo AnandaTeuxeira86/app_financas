@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/table"
 import { formatCurrency, formatDate, type Transaction } from "@/lib/finance"
 import { cn } from "@/lib/utils"
+import { errorMessage } from "@/lib/errors"
 
 function Amount({ t }: { t: Transaction }) {
   const income = t.type === "receita"
@@ -100,7 +101,7 @@ export function TransactionList({
       await onDelete(pendingDelete.id)
       toast.success("Transação excluída.")
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Não foi possível excluir.")
+      toast.error(errorMessage(err, "Não foi possível excluir."))
     }
     setPendingDelete(null)
   }
