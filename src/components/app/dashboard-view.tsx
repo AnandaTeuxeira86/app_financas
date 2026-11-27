@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useMemo, useState } from "react"
 import { ArrowRightIcon, PlusIcon } from "lucide-react"
 import { ExpenseChart } from "@/components/app/expense-chart"
-import { PeriodFilter, useCurrentPeriod } from "@/components/app/period-filter"
+import { PeriodFilter, WithCurrentPeriod, type Period } from "@/components/app/period-filter"
 import { SummaryCards } from "@/components/app/summary-cards"
 import { TransactionDialog } from "@/components/app/transaction-dialog"
 import { TransactionList } from "@/components/app/transaction-list"
@@ -14,7 +14,10 @@ import { useTransactions } from "@/hooks/use-transactions"
 import { expensesByCategory, periodLabel, summarize } from "@/lib/finance"
 
 export function DashboardView() {
-  const initial = useCurrentPeriod()
+  return <WithCurrentPeriod>{(period) => <Dashboard initial={period} />}</WithCurrentPeriod>
+}
+
+function Dashboard({ initial }: { initial: Period }) {
   const [period, setPeriod] = useState(initial)
   const [dialogOpen, setDialogOpen] = useState(false)
   const { transactions, loading, error, create } = useTransactions(period.year, period.month)

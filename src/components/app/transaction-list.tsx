@@ -36,7 +36,7 @@ import { cn } from "@/lib/utils"
 function Amount({ t }: { t: Transaction }) {
   const income = t.type === "receita"
   return (
-    <span className={cn("font-medium tabular-nums", income ? "text-emerald-600" : "text-rose-600")}>
+    <span className={cn("font-medium tabular-nums", income ? "text-income" : "text-expense")}>
       {income ? "+ " : "− "}
       {formatCurrency(t.amount)}
     </span>

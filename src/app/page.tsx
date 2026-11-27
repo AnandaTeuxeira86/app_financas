@@ -9,6 +9,7 @@ import {
   TagsIcon,
 } from "lucide-react"
 import { Logo } from "@/components/app/logo"
+import { ThemeToggle } from "@/components/app/theme-toggle"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -50,7 +51,8 @@ export default function LandingPage() {
     <div className="flex min-h-full flex-col">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Logo />
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-1 sm:gap-2">
+          <ThemeToggle />
           <Link href="/login" className={buttonVariants({ variant: "ghost" })}>
             Entrar
           </Link>
@@ -63,7 +65,7 @@ export default function LandingPage() {
       <main className="flex-1">
         <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
           <div className="space-y-6">
-            <span className="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+            <span className="inline-flex rounded-full bg-income-soft px-3 py-1 text-xs font-medium text-income">
               Gratuito e sem planilhas
             </span>
             <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
@@ -118,17 +120,17 @@ export default function LandingPage() {
 /** Prévia estática do dashboard, ilustrativa. */
 function HeroPreview() {
   const rows = [
-    { label: "Moradia", value: 62, color: "#00b894" },
-    { label: "Alimentação", value: 41, color: "#257de0" },
-    { label: "Transporte", value: 23, color: "#f47230" },
-    { label: "Lazer", value: 14, color: "#f2a600" },
+    { label: "Moradia", value: 62, color: "var(--series-3)" },
+    { label: "Alimentação", value: 41, color: "var(--series-1)" },
+    { label: "Transporte", value: 23, color: "var(--series-2)" },
+    { label: "Lazer", value: 14, color: "var(--series-4)" },
   ]
   return (
     <div className="rounded-2xl border bg-background p-5 shadow-sm" aria-hidden>
       <div className="grid grid-cols-3 gap-3">
         {[
-          ["Receitas", "R$ 6.200", "text-emerald-600"],
-          ["Despesas", "R$ 4.150", "text-rose-600"],
+          ["Receitas", "R$ 6.200", "text-income"],
+          ["Despesas", "R$ 4.150", "text-expense"],
           ["Saldo", "R$ 2.050", "text-foreground"],
         ].map(([label, value, color]) => (
           <div key={label} className="rounded-lg border p-3">

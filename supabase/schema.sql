@@ -36,3 +36,7 @@ create policy "transactions_update_own" on public.transactions
 drop policy if exists "transactions_delete_own" on public.transactions;
 create policy "transactions_delete_own" on public.transactions
   for delete to authenticated using ((select auth.uid()) = user_id);
+
+-- Permissão de acesso à tabela para usuários logados (as políticas acima
+-- continuam limitando cada um às próprias linhas). Visitantes anônimos não têm acesso.
+grant select, insert, update, delete on public.transactions to authenticated;

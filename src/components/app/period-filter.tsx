@@ -1,6 +1,8 @@
 "use client"
 
+import { useSyncExternalStore } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Skeleton } from "@/components/ui/skeleton"
 import { MONTHS } from "@/lib/finance"
 
 const monthItems: Record<string, string> = {
@@ -59,7 +61,35 @@ export function PeriodFilter({
   )
 }
 
-export function useCurrentPeriod() {
+export type Period = { year: number; month: number }
+
+const noopSubscribe = () => () => {}
+const currentPeriodKey = () => {
   const now = new Date()
-  return { year: now.getFullYear(), month: now.getMonth() + 1 }
+  return `${now.getFullYear()}-${now.getMonth() + 1}`
+}
+
+/**
+ * Mês/ano atuais, lidos só no navegador. Durante o pré-render no servidor
+ * retorna null: a data "de hoje" não pode ficar congelada na build.
+ */
+export function useCurrentPeriod(): Period | null {
+  const key = useSyncExternalStore(noopSubscribe, currentPeriodKey, () => null)
+  if (!key) return null
+  const [year, month] = key.split("-").map(Number)
+  return { year, month }
+}
+
+/** Renderiza os filhos com o período atual, mostrando um carregamento até ele estar disponível. */
+export function WithCurrentPeriod({ children }: { children: (period: Period) => React.ReactNode }) {
+  const period = useCurrentPeriod()
+  if (!period) {
+    return (
+      <div className="space-y-6">
+        <Skeleton className="h-12 w-64" />
+        <Skeleton className="h-40 w-full" />
+      </div>
+    )
+  }
+  return children(period)
 }

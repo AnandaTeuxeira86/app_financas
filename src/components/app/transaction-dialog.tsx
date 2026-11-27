@@ -120,7 +120,7 @@ function TransactionForm({
             className={cn(
               "rounded-md py-1.5 text-sm font-medium transition-colors",
               type === t
-                ? cn("bg-background shadow-sm", t === "receita" ? "text-emerald-600" : "text-rose-600")
+                ? cn("bg-background shadow-sm", t === "receita" ? "text-income" : "text-expense")
                 : "text-muted-foreground hover:text-foreground"
             )}
           >

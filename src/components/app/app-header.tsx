@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { LayoutDashboardIcon, ListIcon, LogOutIcon, UserIcon } from "lucide-react"
 import { Logo } from "@/components/app/logo"
+import { ThemeToggle } from "@/components/app/theme-toggle"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -69,7 +70,8 @@ export function AppHeader() {
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Logo href="/dashboard" />
         <nav className="hidden items-center gap-1 sm:flex">{navLinks("")}</nav>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-1">
+          <ThemeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger
               render={<Button variant="ghost" size="icon" aria-label="Conta" />}

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react"
 import { toast } from "sonner"
 import { DownloadIcon, PlusIcon, SearchIcon } from "lucide-react"
-import { PeriodFilter, useCurrentPeriod } from "@/components/app/period-filter"
+import { PeriodFilter, WithCurrentPeriod, type Period } from "@/components/app/period-filter"
 import { TransactionDialog } from "@/components/app/transaction-dialog"
 import { TransactionList } from "@/components/app/transaction-list"
 import { Button } from "@/components/ui/button"
@@ -30,7 +30,10 @@ const normalize = (s: string) =>
   s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
 
 export function TransactionsView() {
-  const initial = useCurrentPeriod()
+  return <WithCurrentPeriod>{(period) => <Transactions initial={period} />}</WithCurrentPeriod>
+}
+
+function Transactions({ initial }: { initial: Period }) {
   const [period, setPeriod] = useState(initial)
   const [category, setCategory] = useState<string>(ALL)
   const [search, setSearch] = useState("")
@@ -134,13 +137,13 @@ export function TransactionsView() {
               <span>{filtered.length} transações</span>
               <span>
                 Receitas:{" "}
-                <span className="font-medium text-emerald-600 tabular-nums">
+                <span className="font-medium text-income tabular-nums">
                   {formatCurrency(totals.income)}
                 </span>
               </span>
               <span>
                 Despesas:{" "}
-                <span className="font-medium text-rose-600 tabular-nums">
+                <span className="font-medium text-expense tabular-nums">
                   {formatCurrency(totals.expense)}
                 </span>
               </span>

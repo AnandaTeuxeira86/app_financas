@@ -19,17 +19,20 @@ export const CATEGORIES_BY_TYPE: Record<TransactionType, Category[]> = {
   despesa: ["Alimentação", "Transporte", "Moradia", "Lazer", "Saúde", "Educação", "Outros"],
 }
 
-/** Cor fixa por categoria de despesa (a cor segue a categoria, nunca a posição no ranking). */
+/**
+ * Cor fixa por categoria (a cor segue a categoria, nunca a posição no ranking).
+ * Aponta para variáveis CSS em globals.css, que mudam entre modo claro e escuro.
+ */
 export const CATEGORY_COLORS: Record<Category, string> = {
-  Alimentação: "#257de0",
-  Transporte: "#f47230",
-  Moradia: "#00b894",
-  Lazer: "#f2a600",
-  Saúde: "#ee7fac",
-  Educação: "#008a17",
-  Outros: "#6a4ce2",
-  Salário: "#257de0",
-  Freelance: "#00b894",
+  Alimentação: "var(--series-1)",
+  Transporte: "var(--series-2)",
+  Moradia: "var(--series-3)",
+  Lazer: "var(--series-4)",
+  Saúde: "var(--series-5)",
+  Educação: "var(--series-6)",
+  Outros: "var(--series-7)",
+  Salário: "var(--series-1)",
+  Freelance: "var(--series-3)",
 }
 
 export interface Transaction {
